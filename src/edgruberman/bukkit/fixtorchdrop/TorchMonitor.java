@@ -22,14 +22,9 @@ final class TorchMonitor extends BlockListener {
     public void onBlockPhysics(final BlockPhysicsEvent event) {
         if (event.isCancelled()) return;
         
-        Main.messageManager.log("BlockPhysicsEvent on Type ID: " + event.getChangedTypeId(), MessageLevel.FINEST);
-        
         // Only check redstone torch related events further
         BlockState state = event.getBlock().getState();
         if (state.getTypeId() != Material.REDSTONE_TORCH_OFF.getId() && state.getTypeId() != Material.REDSTONE_TORCH_ON.getId()) return;
-        
-        Main.messageManager.log("BlockPhysicsEvent has MaterialData of RedstoneTorch: " + (state.getData() instanceof RedstoneTorch)
-                + "; Raw Data = " + state.getRawData() + "; State Type ID = " + state.getTypeId(), MessageLevel.FINEST);
         
         // Let normality happen if the attached chunk is loaded
         RedstoneTorch redstoneTorch = (RedstoneTorch) state.getData();
