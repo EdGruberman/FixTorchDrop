@@ -1,0 +1,9 @@
+send:
+    PLAYER:
+        level: FINE
+    SERVER:
+        level: FINE
+    WORLD:
+        level: FINE
+    LOG:
+        level: FINE
