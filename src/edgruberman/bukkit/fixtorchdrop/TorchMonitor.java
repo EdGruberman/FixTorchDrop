@@ -1,7 +1,6 @@
 package edgruberman.bukkit.fixtorchdrop;
 
 import org.bukkit.Material;
-import org.bukkit.block.BlockState;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockListener;
 import org.bukkit.event.block.BlockPhysicsEvent;
@@ -23,11 +22,10 @@ final class TorchMonitor extends BlockListener {
         if (event.isCancelled()) return;
         
         // Only check redstone torch related events further
-        BlockState state = event.getBlock().getState();
-        if (state.getTypeId() != Material.REDSTONE_TORCH_OFF.getId() && state.getTypeId() != Material.REDSTONE_TORCH_ON.getId()) return;
+        if (event.getBlock().getTypeId() != Material.REDSTONE_TORCH_OFF.getId() && event.getBlock().getTypeId() != Material.REDSTONE_TORCH_ON.getId()) return;
         
         // Let normality happen if the attached chunk is loaded
-        RedstoneTorch redstoneTorch = (RedstoneTorch) state.getData();
+        RedstoneTorch redstoneTorch = (RedstoneTorch) event.getBlock().getState().getData();
         if (event.getBlock().getRelative(redstoneTorch.getAttachedFace()).getChunk().isLoaded()) return;
         
         Main.messageManager.log("Cancelling physics update for a redstone torch in [" + event.getBlock().getWorld().getName() + "] at"
