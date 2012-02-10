@@ -1,5 +1,5 @@
 name: FixTorchDrop
-description: Fix redstone torches dropping when block updates occur and dependent blocks are not loaded.
+description: Fix redstone torches dropping when block updates occur and attached block is not loaded
 version: %VERSION%
 depend: [MessageManager]
 author: EdGruberman (ed@rjump.com)
