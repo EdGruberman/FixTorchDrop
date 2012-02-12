@@ -42,7 +42,14 @@ public final class Main extends JavaPlugin implements Listener {
 
         // Let normality happen if the attached chunk is loaded
         RedstoneTorch redstoneTorch = (RedstoneTorch) event.getBlock().getState().getData();
-        Block attachedBlock = event.getBlock().getRelative(redstoneTorch.getAttachedFace());
+
+        Block attachedBlock = null;
+        try {
+            attachedBlock = event.getBlock().getRelative(redstoneTorch.getAttachedFace());
+        } catch (Exception e) {
+            // bypass error in order to cancel event
+        }
+
         if (attachedBlock != null) {
             Chunk attachedChunk = attachedBlock.getChunk();
             if (attachedChunk != null && attachedChunk.isLoaded()) return;
